@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog
 import android.widget.EditText
 import com.example.mytodoexample.R
 import com.example.mytodoexample.contractors.TaskContract
+import com.example.mytodoexample.domain.entities.Task
 import com.example.mytodoexample.presenters.TaskPresenter
 
 class ListTasksActivity : AppCompatActivity(), TaskContract.View {
@@ -26,13 +27,15 @@ class ListTasksActivity : AppCompatActivity(), TaskContract.View {
 
     private fun buildAddTaskDialog() {
         val addTaskDialog = AddTaskDialogFragment()
-        addTaskDialog.onPositiveOnClickListener = DialogInterface.OnClickListener { _, which ->
+        addTaskDialog.onPositiveOnClickListener = DialogInterface.OnClickListener { _, _ ->
             val text = addTaskDialog.dialog.findViewById<EditText>(R.id.dg_et_title).text.toString()
             presenter.addTaskCalled("ID", text)
         }
         addTaskDialog.show(supportFragmentManager, "")
-
     }
 
+    override fun taskAdded(task: Task) {
+
+    }
 
 }
