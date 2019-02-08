@@ -7,7 +7,7 @@ interface TaskContract {
     }
 
     interface Presenter {
-
+        fun addTaskCalled(id: String, title:String)
     }
 
     interface Interactor {
