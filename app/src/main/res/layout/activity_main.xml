@@ -8,6 +8,7 @@
         tools:context=".ui.listTasks.ListTasksActivity">
 
     <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_tasks"
             android:layout_width="406dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

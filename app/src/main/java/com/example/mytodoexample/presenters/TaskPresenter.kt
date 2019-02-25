@@ -13,7 +13,7 @@ class TaskPresenter: TaskContract.Presenter {
 
     override fun addTaskCalled(id: String, title: String) {
         Log.d(TAG, "id: $id \n title: $title")
-        addTaskInteractor.execute(Task(id, title))
+        addTaskInteractor.execute(Task(title))
     }
 
 }

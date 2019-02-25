@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.mytodoexample.R
-import com.example.mytodoexample.domain.entities.Task
+import com.example.mytodoexample.data.repository.local.RoomTask
 
-class TaskAdapter(val tasks: List<Task>): RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+class TaskAdapter(val tasks: List<RoomTask>): RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_task,
