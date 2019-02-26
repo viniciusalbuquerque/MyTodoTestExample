@@ -2,6 +2,7 @@ package com.example.mytodoexample
 
 import android.app.Application
 import android.arch.persistence.room.Room
+import com.example.mytodoexample.contractors.TaskContract
 import com.example.mytodoexample.data.repository.TaskRepository
 import com.example.mytodoexample.data.repository.local.RoomRepositoryAdapter
 import com.example.mytodoexample.data.repository.local.TaskDatabase
@@ -18,18 +19,15 @@ class ToDoApplication : Application() {
         super.onCreate()
 
         val localRepoModule = module {
-//            single<TaskRepository> {
-//                get() as RoomRepositoryAdapter
-//            }
-//            single { Room.databaseBuilder(applicationContext,
-//                TaskDatabase::class.java, TaskDatabase.DB_NAME)
-//                .build() }
-            single( definition = { Room.databaseBuilder(applicationContext, TaskDatabase::class.java,
-                TaskDatabase.DB_NAME).build()})
+
+            single { Room.databaseBuilder(applicationContext, TaskDatabase::class.java,
+                TaskDatabase.DB_NAME)
+                .allowMainThreadQueries()
+                .build() }
 
             single { get<TaskDatabase>().taskDao() }
 
-            single( definition = { RoomRepositoryAdapter(get()) as TaskRepository })
+            single { RoomRepositoryAdapter(get()) as TaskRepository }
 
         }
 
@@ -39,7 +37,7 @@ class ToDoApplication : Application() {
         }
 
         val presenterModule = module {
-            single { TaskPresenter(get(), get()) }
+            single { TaskPresenter(get(), get()) as TaskContract.Presenter }
         }
 
         startKoin(this, listOf(localRepoModule, interactorsModule, presenterModule))

@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.mytodoexample.data.repository.TaskRepository
 import com.example.mytodoexample.domain.entities.Task
 
-class RoomRepositoryAdapter(val roomRepository: RoomRepository) : TaskRepository {
+class RoomRepositoryAdapter(val taskRoomDAO: TaskRoomDAO) : TaskRepository {
 
     companion object {
         val TAG = "RoomRepositoryAdapter"
@@ -15,12 +15,12 @@ class RoomRepositoryAdapter(val roomRepository: RoomRepository) : TaskRepository
     override fun create(task: Task) {
         Log.d(TAG, "create task: ${task.title}")
         val roomTask = mapper.taksToRoomTask(task)
-        roomRepository.insert(roomTask)
+        taskRoomDAO.insert(roomTask)
 
     }
 
     override fun list() {
-        val tasks = roomRepository.list()
+        val tasks = taskRoomDAO.list()
         Log.d(TAG, tasks.toString())
     }
 

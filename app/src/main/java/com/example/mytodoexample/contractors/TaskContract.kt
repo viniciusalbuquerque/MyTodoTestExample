@@ -6,6 +6,7 @@ interface TaskContract {
 
     interface View {
         fun taskAdded(task: Task)
+        fun listTasks(tasks: List<Task>)
     }
 
     interface Presenter {

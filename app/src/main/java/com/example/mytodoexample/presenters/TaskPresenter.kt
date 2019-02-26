@@ -8,7 +8,7 @@ import com.example.mytodoexample.domain.interactors.ListTask
 
 class TaskPresenter(val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
 
-    private val TAG = "TaskPresenter"
+    val TAG = "TaskPresenter"
 
     override fun addTaskCalled(title: String) {
         Log.d(TAG, "title: $title")

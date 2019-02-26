@@ -8,10 +8,9 @@ abstract class TaskDatabase: RoomDatabase() {
 
     companion object {
         val DB_NAME : String = "tasks-room-database"
-        var INSTANCE: TaskDatabase ?= null
     }
 
-    abstract fun taskDao() : RoomRepository
+    abstract fun taskDao() : TaskRoomDAO
 
 
 }

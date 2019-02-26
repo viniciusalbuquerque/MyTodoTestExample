@@ -15,17 +15,18 @@ import org.koin.android.ext.android.inject
 
 class ListTasksActivity : AppCompatActivity(), TaskContract.View {
 
-    val presenter: TaskContract.Presenter by inject()
-    internal lateinit var rvTasks: RecyclerView
+    private val presenter: TaskContract.Presenter by inject()
+    private lateinit var rvTasks: RecyclerView
+    private lateinit var tasks: MutableList<Task>
+    private lateinit var adapter: TaskAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val list:ArrayList<RoomTask> = getList()
-        configRecyclerView(list)
-
+        this.tasks = ArrayList()
+        configRecyclerView(this.tasks)
 
         val fbAddTask:FloatingActionButton = findViewById(R.id.fb_add_task)
         fbAddTask.setOnClickListener {
@@ -33,14 +34,10 @@ class ListTasksActivity : AppCompatActivity(), TaskContract.View {
         }
     }
 
-    private fun getList(): ArrayList<RoomTask> {
-        return ArrayList()
-    }
-
-    private fun configRecyclerView(list: List<RoomTask>) {
+    private fun configRecyclerView(list: List<Task>) {
         rvTasks = findViewById(R.id.rv_tasks)
-        val tasksAdapter = TaskAdapter(list)
-        rvTasks.adapter = tasksAdapter
+        this.adapter = TaskAdapter(list)
+        rvTasks.adapter = this.adapter
         rvTasks.layoutManager = LinearLayoutManager(this)
 
     }
@@ -55,7 +52,19 @@ class ListTasksActivity : AppCompatActivity(), TaskContract.View {
     }
 
     override fun taskAdded(task: Task) {
+        this.tasks.add(task)
+        this.adapter.notifyItemInserted(this.tasks.size - 1)
+    }
 
+    override fun listTasks(tasks: List<Task>) {
+        this.tasks.clear()
+        this.tasks.addAll(tasks)
+        this.adapter.notifyDataSetChanged()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.listTasksCalled()
     }
 
 }
