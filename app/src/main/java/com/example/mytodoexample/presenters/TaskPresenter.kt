@@ -4,16 +4,21 @@ import android.util.Log
 import com.example.mytodoexample.contractors.TaskContract
 import com.example.mytodoexample.domain.entities.Task
 import com.example.mytodoexample.domain.interactors.AddTask
+import com.example.mytodoexample.domain.interactors.ListTask
 
-class TaskPresenter: TaskContract.Presenter {
+class TaskPresenter(val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
 
     private val TAG = "TaskPresenter"
 
-    private val addTaskInteractor: TaskContract.Interactor<Task> = AddTask()
-
-    override fun addTaskCalled(id: String, title: String) {
-        Log.d(TAG, "id: $id \n title: $title")
+    override fun addTaskCalled(title: String) {
+        Log.d(TAG, "title: $title")
         addTaskInteractor.execute(Task(title))
     }
+
+    override fun listTasksCalled() {
+        listTask.execute(Unit)
+    }
+
+
 
 }

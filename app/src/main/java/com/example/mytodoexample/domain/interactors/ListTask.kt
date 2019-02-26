@@ -3,12 +3,10 @@ package com.example.mytodoexample.domain.interactors
 import com.example.mytodoexample.contractors.TaskContract
 import com.example.mytodoexample.data.repository.TaskRepository
 
-class ListTask: TaskContract.Interactor<Void> {
+class ListTask(val taskRepository: TaskRepository): TaskContract.Interactor<Unit> {
 
-    var taskRepository :TaskRepository ?= null
-
-    override fun execute(param: Void) {
-        taskRepository?.list()
+    override fun execute(param: Unit) {
+        taskRepository.list()
     }
 
 }
