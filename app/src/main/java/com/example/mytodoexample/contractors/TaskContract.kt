@@ -12,6 +12,7 @@ interface TaskContract {
     interface Presenter {
         fun addTaskCalled(title:String)
         fun listTasksCalled()
+        fun taskAdded(task: Task)
     }
 
     interface Interactor<P> {

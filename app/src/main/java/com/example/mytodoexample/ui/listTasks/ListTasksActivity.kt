@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.widget.EditText
 import com.example.mytodoexample.R
 import com.example.mytodoexample.contractors.TaskContract
-import com.example.mytodoexample.data.repository.local.RoomTask
 import com.example.mytodoexample.domain.entities.Task
 import org.koin.android.ext.android.inject
 

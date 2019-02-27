@@ -52,4 +52,6 @@ dependencies {
 
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 }

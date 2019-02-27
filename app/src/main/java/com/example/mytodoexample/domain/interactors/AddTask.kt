@@ -2,8 +2,8 @@ package com.example.mytodoexample.domain.interactors
 
 import android.util.Log
 import com.example.mytodoexample.contractors.TaskContract
-import com.example.mytodoexample.domain.entities.Task
 import com.example.mytodoexample.data.repository.TaskRepository
+import com.example.mytodoexample.domain.entities.Task
 
 class AddTask(val taskRepository: TaskRepository) : TaskContract.Interactor<Task> {
 

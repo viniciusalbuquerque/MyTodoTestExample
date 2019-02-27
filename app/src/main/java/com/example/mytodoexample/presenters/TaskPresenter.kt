@@ -6,7 +6,7 @@ import com.example.mytodoexample.domain.entities.Task
 import com.example.mytodoexample.domain.interactors.AddTask
 import com.example.mytodoexample.domain.interactors.ListTask
 
-class TaskPresenter(val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
+class TaskPresenter(val view: TaskContract.View, val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
 
     val TAG = "TaskPresenter"
 
@@ -17,6 +17,10 @@ class TaskPresenter(val listTask: ListTask, val addTaskInteractor: AddTask) : Ta
 
     override fun listTasksCalled() {
         listTask.execute(Unit)
+    }
+
+    override fun taskAdded(task: Task) {
+        view.taskAdded(task)
     }
 
 
