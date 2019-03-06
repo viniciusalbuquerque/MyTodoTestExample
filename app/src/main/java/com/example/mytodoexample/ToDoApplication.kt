@@ -35,13 +35,13 @@ class ToDoApplication : Application() {
             factory { AddTask(get()) }
             factory { ListTask(get()) }
         }
+//
+//        val presenterModule = module {
+//            single { TaskPresenter(get() as TaskContract.View, get(), get()) as TaskContract.Presenter }
+//        }
 
-        val presenterModule = module {
-            single { TaskPresenter(get(), get(), get()) as TaskContract.Presenter }
-        }
 
-
-        startKoin(this, listOf(localRepoModule, interactorsModule, presenterModule))
+        startKoin(this, listOf(localRepoModule, interactorsModule))
 
 
     }

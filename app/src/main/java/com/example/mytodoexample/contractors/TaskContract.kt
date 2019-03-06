@@ -15,8 +15,8 @@ interface TaskContract {
         fun taskAdded(task: Task)
     }
 
-    interface Interactor<P> {
-        fun execute(param: P)
+    interface Interactor<P, R> {
+        fun execute(param: P, onResponse: OnResponse<R>)
     }
 
 }
