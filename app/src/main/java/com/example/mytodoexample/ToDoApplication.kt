@@ -22,7 +22,6 @@ class ToDoApplication : Application() {
 
             single { Room.databaseBuilder(applicationContext, TaskDatabase::class.java,
                 TaskDatabase.DB_NAME)
-                .allowMainThreadQueries()
                 .build() }
 
             single { get<TaskDatabase>().taskDao() }
