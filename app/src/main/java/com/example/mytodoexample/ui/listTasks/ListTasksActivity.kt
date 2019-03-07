@@ -20,9 +20,9 @@ import org.koin.android.ext.android.inject
 
 class ListTasksActivity : AppCompatActivity(), TaskContract.View {
 
-//    private val presenter: TaskContract.Presenter by inject()
-    private val repository: TaskRepository by inject()
-    private val presenter: TaskContract.Presenter = TaskPresenter(this, ListTask(repository), AddTask(repository))
+    private val presenter: TaskContract.Presenter by inject()
+//    private val repository: TaskRepository by inject()
+//    private val presenter: TaskContract.Presenter = TaskPresenter(this, ListTask(repository), AddTask(repository))
     private lateinit var rvTasks: RecyclerView
     private lateinit var tasks: MutableList<Task>
     private lateinit var adapter: TaskAdapter
@@ -77,9 +77,15 @@ class ListTasksActivity : AppCompatActivity(), TaskContract.View {
         this.adapter.notifyDataSetChanged()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+        presenter.attachView(this)
         presenter.listTasksCalled()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.dettachView()
     }
 
 }

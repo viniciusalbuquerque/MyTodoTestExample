@@ -13,6 +13,8 @@ interface TaskContract {
         fun addTaskCalled(title:String)
         fun listTasksCalled()
         fun taskAdded(task: Task)
+        fun attachView(view: TaskContract.View)
+        fun dettachView()
     }
 
     interface Interactor<P, R> {

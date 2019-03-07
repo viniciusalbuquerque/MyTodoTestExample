@@ -7,15 +7,25 @@ import com.example.mytodoexample.domain.entities.Task
 import com.example.mytodoexample.domain.interactors.AddTask
 import com.example.mytodoexample.domain.interactors.ListTask
 
-class TaskPresenter(val view: TaskContract.View, val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
+class TaskPresenter(val listTask: ListTask, val addTaskInteractor: AddTask) : TaskContract.Presenter {
 
     val TAG = "TaskPresenter"
+
+    var view : TaskContract.View ?= null
+
+    override fun attachView(view: TaskContract.View) {
+        this.view = view
+    }
+
+    override fun dettachView() {
+        this.view = null
+    }
 
     override fun addTaskCalled(title: String) {
         Log.d(TAG, "title: $title")
         addTaskInteractor.execute(Task(title), object : OnResponse<Task> {
             override fun onSuccess(response: Task) {
-                view.taskAdded(response)
+                view?.taskAdded(response)
             }
 
             override fun onFail(error: Throwable) {
@@ -30,7 +40,7 @@ class TaskPresenter(val view: TaskContract.View, val listTask: ListTask, val add
         listTask.execute(Unit, object : OnResponse<List<Task>> {
 
             override fun onSuccess(response: List<Task>) {
-                view.listTasks(response)
+                view?.listTasks(response)
             }
 
             override fun onFail(error: Throwable) {
@@ -42,7 +52,7 @@ class TaskPresenter(val view: TaskContract.View, val listTask: ListTask, val add
     }
 
     override fun taskAdded(task: Task) {
-        view.taskAdded(task)
+        view?.taskAdded(task)
     }
 
 

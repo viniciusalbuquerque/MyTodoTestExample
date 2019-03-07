@@ -3,6 +3,7 @@ package com.example.mytodoexample.data.repository.local
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import com.example.mytodoexample.data.entities.DataTask
 import io.reactivex.Flowable
 
 @Dao
